@@ -1,0 +1,32 @@
+./bin/spark-submit \
+  --class <main-class> \
+  --master <master-url> \
+  --deploy-mode <deploy-mode> \
+  --conf <key>=<value> \
+  ... # other options
+  <application-jar> \
+  [application-arguments]
+
+--master	클러스터 매니저 설정
+--deploy-mode	드라이버의 디플로이 모드 설정
+--class	main 함수가 들어 있는 클래스 지정
+--name	애플리케이션의 이름 지정. 스파크 웹 UI에 표시
+--jars	애플리케이션 실행에 필요한 라이브러리 목록. 콤마로 구분
+--files	애플리케이션 실행에 필요한 파일 목록
+--queue	얀의 실행 큐이름 설정
+--executor-memory	익스큐터가 사용할 메모리 바이트 용량. 512m. 1g 등도 사용 가능
+--driver-memory	드라이버 프로세스가 사용할 메모리 바이트 용량. 512m. 1g 등도 사용 가능
+--num-executors	익스큐터의 개수 설정
+--executor-cores	익스큐터의 코어 개수 설정
+
+spark-submit \
+--master spark://hn0-knyfre.f4wirxmoqxbezjfxdnpel1apdg.syx.internal.cloudapp.net:7077 \
+--executor-memory 10g wordcount.py
+
+
+# 클러스터 매니저가 yarn인 경우 실행 방법 
+$ spark-submit --master yarn \
+  --queue spark_queue \
+  --class sdk.spark.SparkWordCount \
+  --conf spark.shuffle.service.enabled=true \
+  ./Spark-Example.jar
