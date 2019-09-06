@@ -1,0 +1,3 @@
+spark-submit --master yarn ./helloworld.py
+
+spark-submit --master yarn ./wordcount.py /home/knyfree/pyspark/pyspark/als.py
